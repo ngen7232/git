@@ -7,7 +7,7 @@
 /* The main repository */
 static struct repository the_repo = {
 	NULL, NULL,
-	RAW_OBJECT_STORE_INIT,
+	RAW_OBJECT_STORE_INIT(the_repo.objects),
 	NULL, NULL, NULL,
 	NULL, NULL, NULL,
 	&the_index,
@@ -142,6 +142,8 @@ int repo_init(struct repository *repo, const char *gitdir, const char *worktree)
 	memset(repo, 0, sizeof(*repo));
 
 	repo->ignore_env = 1;
+
+	INIT_LIST_HEAD(&repo->objects.packed_git_mru);
 
 	if (repo_init_gitdir(repo, gitdir))
 		goto error;
