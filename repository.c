@@ -12,7 +12,7 @@ static struct repository the_repo = {
 	NULL, NULL, NULL,
 	&the_index,
 	&hash_algos[GIT_HASH_SHA1],
-	0, 0
+	0
 };
 struct repository *the_repository = &the_repo;
 
@@ -138,8 +138,6 @@ int repo_init(struct repository *repo, const char *gitdir, const char *worktree)
 {
 	struct repository_format format;
 	memset(repo, 0, sizeof(*repo));
-
-	repo->ignore_env = 1;
 
 	INIT_LIST_HEAD(&repo->objects.packed_git_mru);
 
