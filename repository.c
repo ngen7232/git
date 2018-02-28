@@ -16,31 +16,6 @@ static struct repository the_repo = {
 };
 struct repository *the_repository = &the_repo;
 
-static char *git_path_from_env(const char *envvar, const char *git_dir,
-			       const char *path, int fromenv)
-{
-	if (fromenv) {
-		const char *value = getenv(envvar);
-		if (value)
-			return xstrdup(value);
-	}
-
-	return xstrfmt("%s/%s", git_dir, path);
-}
-
-static int find_common_dir(struct strbuf *sb, const char *gitdir, int fromenv)
-{
-	if (fromenv) {
-		const char *value = getenv(GIT_COMMON_DIR_ENVIRONMENT);
-		if (value) {
-			strbuf_addstr(sb, value);
-			return 1;
-		}
-	}
-
-	return get_common_dir_noenv(sb, gitdir);
-}
-
 static void expand_base_dir(char **out, const char *in,
 			    const char *base_dir, const char *def_in)
 {
