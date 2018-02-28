@@ -94,6 +94,7 @@ struct set_gitdir_args {
 	const char *object_dir;
 	const char *graft_file;
 	const char *index_file;
+	const char *alternate_db;
 };
 
 extern void repo_set_gitdir(struct repository *repo,

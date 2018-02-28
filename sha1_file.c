@@ -675,15 +675,11 @@ int foreach_alt_odb(alt_odb_fn fn, void *cb)
 
 void prepare_alt_odb(struct repository *r)
 {
-	const char *alt;
-
 	if (r->objects.alt_odb_tail)
 		return;
 
-	alt = getenv(ALTERNATE_DB_ENVIRONMENT);
-
 	r->objects.alt_odb_tail = &r->objects.alt_odb_list;
-	link_alt_odb_entries(r, alt, PATH_SEP, NULL, 0);
+	link_alt_odb_entries(r, r->objects.alternate_db, PATH_SEP, NULL, 0);
 
 	read_info_alternates(r, r->objects.objectdir, 0);
 }
